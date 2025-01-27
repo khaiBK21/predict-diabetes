@@ -1,42 +1,17 @@
 - name: Create Compute Engine instances
   hosts: localhost
   tasks:
-  - name: Bring up the first instance
+  - name: Start an instance
     gcp_compute_instance:
-      name: instance-3
-      machine_type: e2-micro
+      name: instance-1
+      machine_type: e2-medium
       # Refer to https://cloud.google.com/compute/docs/images/os-details#ubuntu_lts
       # or use the command `gcloud compute images list --project=ubuntu-os-cloud`
-      zone: asia-northeast1-a
-      project: decent-mariner-412114
+      zone: asia-southeast1-a
+      project: basic-cabinet-396511
       # The service account is needed to create the resources
       auth_kind: serviceaccount
-      service_account_file: ../secrets/decent-mariner-412114-af97d2332019.json
-      disks:
-        - auto_delete: true
-          boot: true
-          initialize_params:
-            source_image: projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20230727
-      # We use the default network with an external IP for SSH
-      network_interfaces:
-        - network:
-            selfLink: global/networks/default
-          access_configs:
-          - name: External NAT
-            type: ONE_TO_ONE_NAT
-      state: absent # change to absent to delete the instance
-
-  - name: Bring up the second instance
-    gcp_compute_instance:
-      name: instance-4
-      machine_type: e2-micro
-      # Refer to https://cloud.google.com/compute/docs/images/os-details#ubuntu_lts
-      # or use the command `gcloud compute images list --project=ubuntu-os-cloud`
-      zone: asia-northeast1-a
-      project: decent-mariner-412114
-      # The service account is needed to create the resources
-      auth_kind: serviceaccount
-      service_account_file: ../secrets/decent-mariner-412114-af97d2332019.json
+      service_account_file: ../secrets/basic-cabinet-396511-597191740034.json
       disks:
         - auto_delete: true
           boot: true
@@ -64,7 +39,7 @@
         - 0.0.0.0/0  # Allow traffic from any source (use a more specific source range for security)
       direction: INGRESS # Direction from outside to inside, EGRESS is the opposite direction
       description: Allow incoming traffic on port 30000
-      project: decent-mariner-412114
+      project: basic-cabinet-396511
       auth_kind: serviceaccount
-      service_account_file: ../secrets/decent-mariner-412114-af97d2332019.json
+      service_account_file: ../secrets/basic-cabinet-396511-597191740034.json
       state: absent # change to absent to delete the instance

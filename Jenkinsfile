@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment{
-        registry = 'khaibk21/text-classification'
+        registry = 'khaibk21/predict-diabetes'
         registryCredential = 'dockerhub'
     }
 
@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'python:3.8' 
+                    image 'python:3.10' 
                 }
             }
             steps {

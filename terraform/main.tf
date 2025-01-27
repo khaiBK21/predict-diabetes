@@ -7,7 +7,7 @@ terraform {
       version = "4.80.0" // Provider version
     }
   }
-  required_version = "1.5.6" // Terraform version
+  required_version = "1.10.5" // Terraform version
 }
 
 // The library with methods for creating and

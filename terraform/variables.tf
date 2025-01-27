@@ -11,6 +11,6 @@ variable "region" {
 }
 
 variable "bucket" {
-  description = "GCS bucket for MLE course"
-  default     = "mle-course"
+  description = "GCS bucket for diabetes prediction project"
+  default     = "diabetes-prediction"
 }
