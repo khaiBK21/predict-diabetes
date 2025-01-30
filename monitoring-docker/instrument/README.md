@@ -28,13 +28,13 @@ docker build -t foo -f logs/Dockerfile . && docker run -p 8000:8000 --name demo-
 ```
 
 ### Metrics
-Run the OCR app to demonstrate metrics
+Run the app to demonstrate metrics
 ```shell
 cd instrument
 docker build -t foo-metrics -f metrics/Dockerfile . && docker run -p 8000:8000 --name demo-metrics foo-metrics
 ```
 
-Open another terminal to call the OCR endpoint periodically
+Open another terminal to call the endpoint periodically
 ```shell
 cd instrument/metrics
 python client.py

@@ -18,7 +18,7 @@ import joblib
 start_http_server(port=8099, addr="0.0.0.0")
 
 # Service name is required for most backends
-resource = Resource(attributes={SERVICE_NAME: "ocr-service"})
+resource = Resource(attributes={SERVICE_NAME: "predict-diabetes"})
 
 # Exporter to export metrics to Prometheus
 reader = PrometheusMetricReader()
@@ -26,17 +26,17 @@ reader = PrometheusMetricReader()
 # Meter is responsible for creating and recording metrics
 provider = MeterProvider(resource=resource, metric_readers=[reader])
 set_meter_provider(provider)
-meter = metrics.get_meter("myocr", "0.1.2")
+meter = metrics.get_meter("diabetes", "0.1.2")
 
 # Create your first counter
 counter = meter.create_counter(
-    name="ocr_request_counter",
-    description="Number of OCR requests"
+    name="diabetes_request_counter",
+    description="Number of diabetes requests"
 )
 
 histogram = meter.create_histogram(
-    name="ocr_response_histogram",
-    description="OCR response histogram",
+    name="diabetes_response_histogram",
+    description="diabetes response histogram",
     unit="seconds",
 )
 
@@ -70,7 +70,7 @@ def predict(data):
     # starting time
     starting_time = time()
 
-    logger.info("Make predictions ...")
+    logger.info("Making predictions...")
     logger.info(data)
     logger.info(jsonable_encoder(data))
     logger.info(pd.DataFrame(jsonable_encoder(data), index=[0]))
@@ -87,7 +87,7 @@ def predict(data):
     elapsed_time = ending_time - starting_time
 
     # Add histogram
-    logger.info("elapsed time: ", elapsed_time)
+    logger.info("Elapsed time: ", elapsed_time)
     logger.info(elapsed_time)
     histogram.record(elapsed_time, label)
 

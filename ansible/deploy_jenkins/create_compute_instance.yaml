@@ -4,7 +4,7 @@
   - name: Start an instance
     gcp_compute_instance:
       name: instance-1
-      machine_type: e2-medium
+      machine_type: e2-micro
       # Refer to https://cloud.google.com/compute/docs/images/os-details#ubuntu_lts
       # or use the command `gcloud compute images list --project=ubuntu-os-cloud`
       zone: asia-southeast1-a

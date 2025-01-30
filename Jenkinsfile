@@ -39,9 +39,21 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent {
+                kubernetes {
+                    containerTemplate {
+                        name 'helm'
+                        image 'fullstackdatascience/jenkins-k8s:lts'
+                        imagePullPolicy 'Always'
+                    }
+                }
+            }
             steps {
                 echo 'Deploying models..'
                 echo 'Running a script to trigger pull and start a docker container'
+                container('helm') {
+                    sh("helm upgrade --install diabetes ./monitoring-k8s --namespace model-serving --create-namespace")
+                }
             }
         }
     }
